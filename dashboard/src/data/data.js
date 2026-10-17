@@ -122,6 +122,7 @@ export const holdings = [
     price: 2112.4,
     net: "-3.71%",
     day: "+1.44%",
+    isLoss: true,
   },
   {
     name: "SBIN",

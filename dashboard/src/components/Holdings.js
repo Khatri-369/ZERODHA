@@ -1,7 +1,20 @@
 import React from "react";
-import { holdings } from "../data/data";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const Holdings = () => {
+  const [holdings, setholdings] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:3002/allholdings").then((res) => {
+      setholdings(res.data);
+    });
+  }, []);
+
+  return <HoldingsDashboard holdings={holdings} />
+}
+
+const HoldingsDashboard = ({ holdings }) => {
   return (
     <>
       <h3 className="title">Holdings ({holdings.length})</h3>
