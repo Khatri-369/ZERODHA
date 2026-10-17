@@ -1,0 +1,5 @@
+manifest.json -> when we first open the website it will store the name , icons... in cache memory
+and second time when we open the website it will not use internet and load website fast.
+
+
+react-router-dom -> browser-route,routes,route,link
