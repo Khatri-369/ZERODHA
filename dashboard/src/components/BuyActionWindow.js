@@ -3,18 +3,12 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 import GeneralContext from "./GeneralContext";
-import { useMarket } from "../context/MarketContext";
 import "./BuyActionWindow.css";
 
 const BuyActionWindow = ({ uid, mode = "BUY" }) => {
   const { closeBuyWindow } = useContext(GeneralContext);
-  const { quotes, watchlist } = useMarket();
-
-  const currentStock = (quotes && quotes[uid]) || (watchlist && watchlist.find((w) => w.name === uid));
-  const initialPrice = currentStock ? currentStock.price : 0.0;
-
   const [stockQuantity, setStockQuantity] = useState(1);
-  const [stockPrice, setStockPrice] = useState(initialPrice);
+  const [stockPrice, setStockPrice] = useState(0.0);
 
   const handleOrderClick = () => {
     axios.post("http://localhost:3002/newOrder", {

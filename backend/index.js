@@ -19,7 +19,6 @@ const UserModel = require("./model/UserSchema");
 
 const { createSecretToken } = require("./util/secretToken");
 const { isLoggedIn } = require("./middleware/authMiddleware");
-const { fetchLiveMarketData } = require("./marketService");
 
 app.use(cors({
     origin: ["http://localhost:3000", "http://localhost:3001"],
@@ -278,18 +277,6 @@ app.get("/allorders", async (req, res) => {
         res.json(orders);
     } catch (err) {
         console.error("DB error:", err);
-        res.status(500).json({ success: false, error: err.message });
-    }
-});
-
-// REAL-TIME MARKET DATA (Upstox with instant dummy fallback)
-app.get("/live-quotes", async (req, res) => {
-    try {
-        const forceDummy = req.query.dummy === "true";
-        const marketData = await fetchLiveMarketData(forceDummy);
-        res.json(marketData);
-    } catch (err) {
-        console.error("Market data error:", err);
         res.status(500).json({ success: false, error: err.message });
     }
 });

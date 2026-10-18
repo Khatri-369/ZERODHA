@@ -1,32 +1,6 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { useMarket } from "../context/MarketContext";
+import React from "react";
 
 const Summary = () => {
-  const [holdings, setHoldings] = useState([]);
-  const { quotes } = useMarket();
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:3002/allholdings")
-      .then((res) => {
-        if (Array.isArray(res.data)) {
-          setHoldings(res.data);
-        }
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
-  const totalInvestment = holdings.reduce((acc, s) => acc + (s.qty * s.avg), 0) || 29875.55;
-  const totalCurValue = holdings.length > 0
-    ? holdings.reduce((acc, s) => {
-        const livePrice = quotes[s.name] ? quotes[s.name].price : s.price;
-        return acc + (s.qty * livePrice);
-      }, 0)
-    : 31428.95;
-  const totalPL = totalCurValue - totalInvestment;
-  const plPct = totalInvestment > 0 ? ((totalPL / totalInvestment) * 100).toFixed(2) : "5.20";
-
   return (
     <>
       <div className="username">
@@ -60,13 +34,13 @@ const Summary = () => {
 
       <div className="section">
         <span>
-          <p>Holdings ({holdings.length || 13})</p>
+          <p>Holdings (13)</p>
         </span>
 
         <div className="data">
           <div className="first">
-            <h3 className={totalPL >= 0 ? "profit" : "loss"}>
-              {(totalPL / 1000).toFixed(2)}k <small>{totalPL >= 0 ? "+" : ""}{plPct}%</small>{" "}
+            <h3 className="profit">
+              1.55k <small>+5.20%</small>{" "}
             </h3>
             <p>P&L</p>
           </div>
@@ -74,10 +48,10 @@ const Summary = () => {
 
           <div className="second">
             <p>
-              Current Value <span>{(totalCurValue / 1000).toFixed(2)}k</span>{" "}
+              Current Value <span>31.43k</span>{" "}
             </p>
             <p>
-              Investment <span>{(totalInvestment / 1000).toFixed(2)}k</span>{" "}
+              Investment <span>29.88k</span>{" "}
             </p>
           </div>
         </div>

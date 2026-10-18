@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 
 import { Tooltip, Grow } from "@mui/material";
 
-import { useMarket } from "../context/MarketContext";
+import { watchlist } from "../data/data";
 import GeneralContext from "./GeneralContext";
 import { DoughnutChart } from "./DonutChart";
 import {
@@ -13,7 +13,6 @@ import {
 } from "@mui/icons-material";
 
 const WatchList = () => {
-  const { watchlist } = useMarket();
   const [searchTerm, setSearchTerm] = useState("");
 
   const filteredWatchlist = (watchlist || []).filter((stock) =>
@@ -105,9 +104,7 @@ const WatchListItem = ({ stock }) => {
           ) : (
             <KeyboardArrowUp className="up" />
           )}
-          <span className="price">
-            {typeof stock.price === "number" ? stock.price.toFixed(2) : stock.price}
-          </span>
+          <span className="price">{stock.price}</span>
         </div>
       </div>
       {showWatchlistAction && <WatchListAction uid={stock.name} />}
