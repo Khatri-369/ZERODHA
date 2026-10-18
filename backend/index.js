@@ -21,11 +21,21 @@ const { createSecretToken } = require("./util/secretToken");
 const { isLoggedIn } = require("./middleware/authMiddleware");
 
 app.use(cors({
-    origin: ["http://localhost:3000", "http://localhost:3001"],
+    origin: [
+        "http://localhost:3000",
+        "http://localhost:3001",
+        "https://main.dmv78knqh15da.amplifyapp.com",
+        /\.amplifyapp\.com$/
+    ],
     credentials: true,
 }));
 app.use(cookieParser());
 app.use(bodyParser.json());
+
+// Root Health Route
+app.get("/", (req, res) => {
+    res.send("🚀 Zerodha Backend API is running successfully on Render!");
+});
 
 mongoose.connect(url)
     .then(() => {

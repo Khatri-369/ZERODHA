@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { API_BASE_URL } from "../config";
 
 const Menu = () => {
   const [selectedMenu, setSelectedMenu] = useState(0);
@@ -7,7 +8,7 @@ const Menu = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:3002/user/profile", { credentials: "include" })
+    fetch(`${API_BASE_URL}/user/profile`, { credentials: "include" })
       .then((res) => res.json())
       .then((data) => {
         if (data.success && data.user) {
@@ -29,12 +30,12 @@ const Menu = () => {
 
   const handleLogout = async () => {
     try {
-      await fetch("http://localhost:3002/logout", { credentials: "include" });
+      await fetch(`${API_BASE_URL}/logout`, { credentials: "include" });
     } catch (e) {
       console.error("Logout error", e);
     }
     setUser(null);
-    window.location.href = "http://localhost:3000/login";
+    window.location.href = "/login";
   };
 
   const menuClass = "menu";
