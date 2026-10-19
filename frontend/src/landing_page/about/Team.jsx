@@ -20,7 +20,7 @@ export default function Team() {
                         KHATRI OM KUMAR
                     </h5>
                     <p className="text-muted" style={{ fontSize: "15px" }}>
-                        Founder & Chief Architect
+                        Founder & CEO
                     </p>
                 </div>
 
