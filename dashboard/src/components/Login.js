@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { API_BASE_URL } from "../config";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -18,7 +17,7 @@ const Login = () => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await axios.get(`${API_BASE_URL}/user/profile`, {
+        const res = await axios.get("http://localhost:3002/user/profile", {
           withCredentials: true,
         });
         if (res.data && res.data.success && res.data.user) {
@@ -49,7 +48,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const res = await axios.post(`${API_BASE_URL}/login`, formData, {
+      const res = await axios.post("http://localhost:3002/login", formData, {
         withCredentials: true,
       });
 
