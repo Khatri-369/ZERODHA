@@ -31,7 +31,7 @@ function Navbar() {
             console.error("Logout error", e);
         }
         setUser(null);
-        navigate("/login");
+        navigate("/");
     };
 
     return (

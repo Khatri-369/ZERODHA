@@ -36,7 +36,7 @@ const Menu = () => {
       console.error("Logout error", e);
     }
     setUser(null);
-    window.location.href = "/login";
+    window.location.href = LANDING_URL;
   };
 
   const menuClass = "menu";
