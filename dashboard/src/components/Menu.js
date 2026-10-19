@@ -8,7 +8,10 @@ const Menu = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    fetch(`${API_BASE_URL}/user/profile`, { credentials: "include" })
+    const token = localStorage.getItem("token");
+    const headers = token ? { Authorization: `Bearer ${token}` } : {};
+
+    fetch(`${API_BASE_URL}/user/profile`, { credentials: "include", headers })
       .then((res) => res.json())
       .then((data) => {
         if (data.success && data.user) {
@@ -34,6 +37,8 @@ const Menu = () => {
     } catch (e) {
       console.error("Logout error", e);
     }
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
     setUser(null);
     window.location.href = "/login";
   };

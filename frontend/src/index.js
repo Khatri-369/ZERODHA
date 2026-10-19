@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import HomePage from './landing_page/home/HomePage.jsx';
 
+// IMPORTING THE COMPONENTS
+import HomePage from './landing_page/home/HomePage.jsx';
 import SignUpPage from './landing_page/signup/Signup.jsx';
 import LoginPage from './landing_page/login/Login.jsx';
 import AboutPage from './landing_page/about/Aboutpage.jsx';

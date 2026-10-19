@@ -35,11 +35,17 @@ function Login() {
                 withCredentials: true,
             });
 
-            if (res.data && res.data.success) {
-                setSuccessMsg("Logged in successfully! Redirecting...");
+            if (res.data && (res.data.success || res.status === 200)) {
+                if (res.data.token) {
+                    localStorage.setItem("token", res.data.token);
+                }
+                if (res.data.user) {
+                    localStorage.setItem("user", JSON.stringify(res.data.user));
+                }
+                setSuccessMsg("Logged in successfully! Redirecting to Dashboard...");
                 setTimeout(() => {
-                    navigate("/");
-                }, 1200);
+                    window.location.href = "http://localhost:3001";
+                }, 1000);
             } else {
                 setErrorMsg(res.data.message || "Invalid credentials. Please try again.");
             }
@@ -90,23 +96,23 @@ function Login() {
                         )}
 
                         <form onSubmit={handleSubmit}>
-                            {/* Email or Username */}
+                            {/* Email */}
                             <div className="mb-3">
                                 <label className="form-label text-muted small fw-medium mb-1">
-                                    Email or Username
+                                    Email Address
                                 </label>
                                 <div className="input-group">
                                     <span className="input-group-text bg-light border-end-0">
-                                        <i className="fa-regular fa-user text-muted"></i>
+                                        <i className="fa-regular fa-envelope text-muted"></i>
                                     </span>
                                     <input
-                                        type="text"
+                                        type="email"
                                         name="email"
                                         className="form-control border-start-0"
-                                        placeholder="Enter email or username"
+                                        placeholder="Enter your email"
                                         value={formData.email}
                                         onChange={handleChange}
-                                        autoComplete="username"
+                                        autoComplete="email"
                                         required
                                     />
                                 </div>

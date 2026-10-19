@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API_BASE_URL } from "../config";
@@ -13,6 +13,29 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
+
+  // Check if already authenticated
+  useEffect(() => {
+    const checkAuth = async () => {
+      const storedToken = localStorage.getItem("token");
+      try {
+        const headers = storedToken
+          ? { Authorization: `Bearer ${storedToken}` }
+          : {};
+        const res = await fetch(`${API_BASE_URL}/user/profile`, {
+          credentials: "include",
+          headers,
+        });
+        const data = await res.json();
+        if (data && data.success && data.user) {
+          navigate("/", { replace: true });
+        }
+      } catch (e) {
+        // Not logged in or backend offline
+      }
+    };
+    checkAuth();
+  }, [navigate]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -36,11 +59,17 @@ const Login = () => {
         withCredentials: true,
       });
 
-      if (res.data && res.data.success) {
+      if (res.data && (res.data.success || res.status === 200)) {
+        if (res.data.token) {
+          localStorage.setItem("token", res.data.token);
+        }
+        if (res.data.user) {
+          localStorage.setItem("user", JSON.stringify(res.data.user));
+        }
         setSuccessMsg("Login successful! Redirecting to Dashboard...");
         setTimeout(() => {
-          navigate("/");
-        }, 1200);
+          navigate("/", { replace: true });
+        }, 1000);
       } else {
         setErrorMsg(res.data.message || "Invalid credentials. Please try again.");
       }
@@ -131,14 +160,14 @@ const Login = () => {
                 marginBottom: "6px",
               }}
             >
-              Email or Username
+              Email Address
             </label>
             <input
-              type="text"
+              type="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
-              placeholder="Username or email"
+              placeholder="Enter your email"
               required
               style={{
                 width: "100%",

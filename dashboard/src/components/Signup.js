@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API_BASE_URL } from "../config";
@@ -14,6 +14,29 @@ const Signup = () => {
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
+
+  // Check if already authenticated
+  useEffect(() => {
+    const checkAuth = async () => {
+      const storedToken = localStorage.getItem("token");
+      try {
+        const headers = storedToken
+          ? { Authorization: `Bearer ${storedToken}` }
+          : {};
+        const res = await fetch(`${API_BASE_URL}/user/profile`, {
+          credentials: "include",
+          headers,
+        });
+        const data = await res.json();
+        if (data && data.success && data.user) {
+          navigate("/", { replace: true });
+        }
+      } catch (e) {
+        // Not logged in
+      }
+    };
+    checkAuth();
+  }, [navigate]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -42,11 +65,17 @@ const Signup = () => {
         withCredentials: true,
       });
 
-      if (res.data && res.data.success) {
+      if (res.data && (res.data.success || res.status === 201 || res.data.token)) {
+        if (res.data.token) {
+          localStorage.setItem("token", res.data.token);
+        }
+        if (res.data.user) {
+          localStorage.setItem("user", JSON.stringify(res.data.user));
+        }
         setSuccessMsg("Account created successfully! Redirecting to Dashboard...");
         setTimeout(() => {
-          navigate("/");
-        }, 1200);
+          navigate("/", { replace: true });
+        }, 1000);
       } else {
         setErrorMsg(res.data.message || "Signup failed. Please try again.");
       }

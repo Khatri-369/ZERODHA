@@ -41,11 +41,17 @@ function Signup() {
                 withCredentials: true,
             });
 
-            if (res.data && res.data.success) {
-                setSuccessMsg("Account created successfully! Redirecting...");
+            if (res.data && (res.data.success || res.status === 201 || res.data.token)) {
+                if (res.data.token) {
+                    localStorage.setItem("token", res.data.token);
+                }
+                if (res.data.user) {
+                    localStorage.setItem("user", JSON.stringify(res.data.user));
+                }
+                setSuccessMsg("Account created successfully! Redirecting to Dashboard...");
                 setTimeout(() => {
-                    navigate("/");
-                }, 1500);
+                    window.location.href = "http://localhost:3001";
+                }, 1000);
             } else {
                 setErrorMsg(res.data.message || "Signup failed. Please try again.");
             }

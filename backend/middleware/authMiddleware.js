@@ -6,6 +6,8 @@ const isLoggedIn = (req, res, next) => {
 
     if (req.cookies && req.cookies.jwt) {
         token = req.cookies.jwt;
+    } else if (req.headers && req.headers.authorization && req.headers.authorization.startsWith("Bearer ")) {
+        token = req.headers.authorization.split(" ")[1];
     }
 
     if (!token) {
