@@ -20,7 +20,7 @@ const Login = () => {
         const res = await axios.get("http://localhost:3002/user/profile", {
           withCredentials: true,
         });
-        if (res.data && res.data.success && res.data.user) {
+        if (res.data && (res.data.success || res.data.user)) {
           navigate("/", { replace: true });
         }
       } catch (e) {

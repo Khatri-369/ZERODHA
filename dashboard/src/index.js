@@ -3,13 +3,13 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./index.css";
 import axios from "axios";
-
-// Enable automatic cookie transmission on all dashboard axios requests
-axios.defaults.withCredentials = true;
 import Home from "./components/Home";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
+
+// Enable automatic cookie transmission on all dashboard axios requests
+axios.defaults.withCredentials = true;
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

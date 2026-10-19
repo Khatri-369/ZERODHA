@@ -14,7 +14,7 @@ function Navbar() {
         axios
             .get("http://localhost:3002/user/profile", { withCredentials: true })
             .then((res) => {
-                if (res.data && res.data.success && res.data.user) {
+                if (res.data && (res.data.success || res.data.user)) {
                     setUser(res.data.user);
                 } else {
                     setUser(null);

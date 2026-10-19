@@ -20,7 +20,7 @@ const ProtectedRoute = ({ children }) => {
         });
 
         if (isMounted) {
-          if (res.data && res.data.success && res.data.user) {
+          if (res.data && (res.data.success || res.data.user)) {
             setAuthState({
               isLoading: false,
               isAuthenticated: true,

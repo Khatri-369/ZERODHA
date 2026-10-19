@@ -182,7 +182,6 @@ app.get("/logout", (req, res) => {
 // 4. Protected Profile Route (Using verifyUserCookie middleware)
 app.get("/user/profile", verifyUserCookie, (req, res) => {
     res.json({
-        success: true,
         user: req.user,
     });
 });
