@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { API_BASE_URL } from "../config";
+import { API_BASE_URL, LANDING_URL } from "../config";
 
 const Menu = () => {
   const [selectedMenu, setSelectedMenu] = useState(0);
@@ -115,7 +115,7 @@ const Menu = () => {
               </div>
               <hr style={{ margin: "8px 0", height: "1px", background: "#eee", border: "none" }} />
               <a
-                href="http://localhost:3000"
+                href={LANDING_URL}
                 style={{
                   display: "block",
                   textDecoration: "none",
