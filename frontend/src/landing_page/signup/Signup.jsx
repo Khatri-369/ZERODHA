@@ -66,13 +66,13 @@ function Signup() {
                 <div className="col-12 col-lg-6 text-center mb-5 mb-lg-0">
                     <img
                         src="media/images/signup.png"
-                        alt="Zerodha Signup Illustration"
+                        alt="TradeFlow Signup Illustration"
                         className="img-fluid"
                         style={{ maxHeight: "380px" }}
                     />
                     <div className="mt-4 px-3 text-start d-none d-md-block mx-auto" style={{ maxWidth: "420px" }}>
                         <h4 className="fw-semibold text-muted mb-3" style={{ fontSize: "1.1rem" }}>
-                            Why trade with Zerodha?
+                            Why trade with TradeFlow?
                         </h4>
                         <ul className="list-unstyled text-secondary" style={{ fontSize: "0.95rem", lineHeight: "1.8" }}>
                             <li><i className="fa-solid fa-check text-success me-2"></i> Free equity investments & ₹0 mutual funds</li>
@@ -208,7 +208,7 @@ function Signup() {
                         </div>
 
                         <p className="text-muted text-center mt-4 mb-0" style={{ fontSize: "0.78rem", lineHeight: "1.4" }}>
-                            By signing up, you agree to Zerodha's terms & conditions and privacy policy.
+                            By signing up, you agree to TradeFlow's terms & conditions and privacy policy.
                         </p>
                     </div>
                 </div>

@@ -19,17 +19,17 @@ export default function CreateTicket() {
                         <li><a href="#" className="text-decoration-none" style={{ color: "#387ed1" }}>Offline Account Opening</a></li>
                         <li><a href="#" className="text-decoration-none" style={{ color: "#387ed1" }}>Company, Partnership and HUF Account Opening</a></li>
                         <li><a href="#" className="text-decoration-none" style={{ color: "#387ed1" }}>Non Resident Indian (NRI)</a></li>
-                        <li><a href="#" className="text-decoration-none" style={{ color: "#387ed1" }}>Charges at Zerodha</a></li>
-                        <li><a href="#" className="text-decoration-none" style={{ color: "#387ed1" }}>Zerodha IDFC FIRST Bank 3-in-1 Account</a></li>
+                        <li><a href="#" className="text-decoration-none" style={{ color: "#387ed1" }}>Charges at TradeFlow</a></li>
+                        <li><a href="#" className="text-decoration-none" style={{ color: "#387ed1" }}>TradeFlow 3-in-1 Account</a></li>
                         <li><a href="#" className="text-decoration-none" style={{ color: "#387ed1" }}>Getting Started</a></li>
                     </ul>
                 </div>
 
-                {/* 2. Your Zerodha Account */}
+                {/* 2. Your TradeFlow Account */}
                 <div className="col-lg-4 col-md-6 mb-5">
                     <h4 className="fs-5 fw-normal mb-3 text-dark d-flex align-items-center">
                         <i className="fa-regular fa-user me-3 text-secondary"></i>
-                        <span>Your Zerodha Account</span>
+                        <span>Your TradeFlow Account</span>
                     </h4>
                     <ul className="list-unstyled ps-4" style={{ lineHeight: "2.4", fontSize: "14.5px" }}>
                         <li><a href="#" className="text-decoration-none" style={{ color: "#387ed1" }}>Login credentials</a></li>

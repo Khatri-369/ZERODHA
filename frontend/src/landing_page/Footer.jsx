@@ -8,7 +8,7 @@ function Footer() {
                     <div className="col">
                         <img src="media/images/logo.svg" style={{ width: "50%" }} alt="Logo" />
                         <p className="text-muted mt-3" style={{ fontSize: "14px" }}>
-                            &copy; 2010 - 2026, Zerodha Broking Ltd.<br />All rights reserved.
+                            &copy; 2024 - 2026, TradeFlow Technologies Ltd.<br />All rights reserved.
                         </p>
                         <div className="d-flex gap-3 mt-4 fs-5">
                             <a href="#" className="text-muted"><i className="fa-brands fa-x-twitter"></i></a>
@@ -64,8 +64,8 @@ function Footer() {
                             <li className="mb-2"><a href="#" className="text-muted text-decoration-none">Philosophy</a></li>
                             <li className="mb-2"><a href="#" className="text-muted text-decoration-none">Press & media</a></li>
                             <li className="mb-2"><a href="#" className="text-muted text-decoration-none">Careers</a></li>
-                            <li className="mb-2"><a href="#" className="text-muted text-decoration-none">Zerodha Cares (CSR)</a></li>
-                            <li className="mb-2"><a href="#" className="text-muted text-decoration-none">Zerodha.tech</a></li>
+                            <li className="mb-2"><a href="#" className="text-muted text-decoration-none">TradeFlow Cares (CSR)</a></li>
+                            <li className="mb-2"><a href="#" className="text-muted text-decoration-none">TradeFlow.tech</a></li>
                             <li className="mb-2"><a href="#" className="text-muted text-decoration-none">Open source</a></li>
                             <li className="mb-2"><a href="#" className="text-muted text-decoration-none">Referral program</a></li>
                         </ul>
@@ -88,7 +88,7 @@ function Footer() {
 
                 <div className="mt-5 text-muted" style={{ fontSize: "11px", lineHeight: "1.6" }}>
                     <p>
-                        Zerodha Broking Ltd.: Member of NSE, BSE​ &​ MCX – SEBI Registration no.: INZ000031633 CDSL/NSDL: Depository services through Zerodha Broking Ltd. – SEBI Registration no.: IN-DP-431-2019 Commodity Trading through Zerodha Commodities Pvt. Ltd. MCX: 46025; NSE-50001 – SEBI Registration no.: INZ000038238 Registered Address: Zerodha Broking Ltd., #153/154, 4th Cross, Dollars Colony, Opp. Clarence Public School, J.P Nagar 4th Phase, Bengaluru - 560078, Karnataka, India. For any complaints pertaining to securities broking please write to complaints@zerodha.com, for DP related to dp@zerodha.com. Please ensure you carefully read the Risk Disclosure Document as prescribed by SEBI | ICF.
+                        TradeFlow Technologies Ltd.: Next-generation retail trading & investment platform engineered by Om Kumar Khatri. Member of NSE, BSE &amp; MCX. For complaints pertaining to securities broking please write to complaints@tradeflow.com, for DP related to dp@tradeflow.com. Please ensure you carefully read the Risk Disclosure Document as prescribed by SEBI.
                     </p>
                     <p>
                         Procedure to file a complaint on SEBI SCORES: Register on SCORES portal. Mandatory details for filing complaints on SCORES: Name, PAN, Address, Mobile Number, E-mail ID. Benefits: Effective Communication, Speedy redressal of the grievances.

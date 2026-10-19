@@ -3,7 +3,7 @@ import React from "react";
 export default function Universe() {
     return (
         <div className="container mt-5 text-center">
-            <h1 className="mt-5">The Zerodha Universe</h1>
+            <h1 className="mt-5">The TradeFlow Universe</h1>
             <p className="mt-3 text-muted">
                 Extend your trading and investment experience even further with our partner platforms
             </p>
@@ -21,7 +21,7 @@ export default function Universe() {
                     <p className="text-small text-muted mt-2">Options trading platform</p>
                 </div>
                 <div className="col-4 p-3 mt-4">
-                    <img src="media/images/zerodhaFundhouse.png" alt="Zerodha Fund House" style={{ width: "180px" }} />
+                    <img src="media/images/zerodhaFundhouse.png" alt="TradeFlow Fund House" style={{ width: "180px" }} />
                     <p className="text-small text-muted mt-2">Asset management</p>
                 </div>
                 <div className="col-4 p-3 mt-4">

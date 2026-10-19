@@ -68,7 +68,7 @@ const ProtectedRoute = ({ children }) => {
       >
         <img
           src="logo.png"
-          alt="Zerodha Kite"
+          alt="TradeFlow Kite"
           style={{ width: "48px", marginBottom: "16px", opacity: 0.9 }}
         />
         <div

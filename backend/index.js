@@ -54,7 +54,7 @@ const setAuthCookie = (res, token) => {
 
 //ROOT HEALTH ROUTE
 app.get("/", (req, res) => {
-    res.send("🚀 Zerodha Backend API is running successfully on Render!");
+    res.send("🚀 TradeFlow Backend API is running successfully on Render!");
 });
 
 //DATABASE CONNECTION

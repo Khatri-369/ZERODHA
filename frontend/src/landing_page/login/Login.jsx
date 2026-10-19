@@ -61,7 +61,7 @@ function Login() {
                         <div className="text-center mb-4">
                             <img
                                 src="media/images/kite.png"
-                                alt="Zerodha Kite Logo"
+                                alt="TradeFlow Kite Logo"
                                 style={{ width: "55px", marginBottom: "15px" }}
                                 onError={(e) => {
                                     e.target.onerror = null;
@@ -69,7 +69,7 @@ function Login() {
                                 }}
                             />
                             <h2 className="fw-bold mb-1" style={{ color: "#444", fontSize: "1.75rem" }}>
-                                Login to Kite
+                                Login to TradeFlow Kite
                             </h2>
                             <p className="text-muted" style={{ fontSize: "0.92rem" }}>
                                 Enter your credentials to access your account

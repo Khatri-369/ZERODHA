@@ -102,12 +102,12 @@ const Signup = () => {
         }}
       >
         <div style={{ textAlign: "center", marginBottom: "28px" }}>
-          <img src="logo.png" alt="Zerodha Kite Logo" style={{ width: "50px", marginBottom: "12px" }} />
+          <img src="logo.png" alt="TradeFlow Kite Logo" style={{ width: "50px", marginBottom: "12px" }} />
           <h2 style={{ fontSize: "1.6rem", fontWeight: "600", color: "#333", margin: "0 0 6px" }}>
-            Open a Kite Account
+            Open a TradeFlow Kite Account
           </h2>
           <p style={{ fontSize: "0.88rem", color: "#666", margin: 0 }}>
-            Sign up to trade and invest with Zerodha
+            Sign up to trade and invest with TradeFlow
           </p>
         </div>
 

@@ -124,7 +124,7 @@ const Menu = () => {
                   marginBottom: "8px",
                 }}
               >
-                Zerodha Home
+                TradeFlow Home
               </a>
               <button
                 onClick={handleLogout}

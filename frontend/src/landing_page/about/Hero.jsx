@@ -11,11 +11,11 @@ export default function Hero() {
 
                     <div className="row d-flex justify-content-center mt-5" style={{ columnGap: "5%", flexWrap: "wrap-reverse" }}>
                         <div className="col-5" style={{ fontSize: "18px" }}>
-                            We kick-started operations on the 15th of August, 2010 with the goal of breaking all barriers that traders and investors face in India in terms of cost, support, and technology. We named the company Zerodha, a combination of Zero and "Rodha", the Sanskrit word for barrier.
+                            We kick-started operations with the goal of breaking all barriers that traders and investors face in India in terms of cost, support, and technology. We named the company TradeFlow, representing seamless capital flow and effortless, lightning-fast execution.
                             <br /><br />
-                            Today, our disruptive pricing models and in-house technology have made us the biggest stock broker in India.
+                            Today, our disruptive zero-brokerage model and modern cloud-native architecture power traders across India with speed and confidence.
                             <br /><br />
-                            Over 1.8+ crore clients place billions of orders every year through our powerful ecosystem of investment platforms, contributing over 15% of all Indian retail trading volumes.
+                            Over 1.8+ crore clients place billions of orders every year through our powerful ecosystem of investment platforms, contributing over 15% of all retail trading volumes.
                         </div>
 
                         <div className="col-6" style={{ fontSize: "18px" }}>

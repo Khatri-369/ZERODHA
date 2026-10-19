@@ -9,15 +9,15 @@ function Stats() {
 
                     <h2 className="fs-4">Customer-first always</h2>
                     <p className="text-muted">
-                        That's why 1.8+ crore customers trust Zerodha with ~ ₹9 lakh crores of equity investments, making us India’s largest broker; contributing to 15% of daily retail exchange volumes in India.
+                        That's why 1.8+ crore customers trust TradeFlow with over ₹9 lakh crores of investments, making us one of the nation's premier retail trading ecosystems.
                     </p>
 
                     <h2 className="fs-4">No spam or gimmicks</h2>
                     <p className="text-muted">
-                        No gimmicks, spam, "gamification", or annoying push notifications. High quality apps that you use at your pace, the way you like. <a href="https://zerodha.com/about/philosophy" style={{ textDecoration: "none" }}>Our philosophies</a>.
+                        No gimmicks, spam, "gamification", or annoying push notifications. High-speed, intuitive platforms engineered for serious traders and long-term investors alike.
                     </p>
 
-                    <h2 className="fs-4">The Zerodha universe</h2>
+                    <h2 className="fs-4">The TradeFlow universe</h2>
                     <p className="text-muted">
                         Not just an app, but a whole ecosystem. Our investments in 30+ fintech startups offer you tailored services specific to your needs.
                     </p>
