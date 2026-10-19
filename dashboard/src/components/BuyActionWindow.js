@@ -1,29 +1,67 @@
 import React, { useState, useContext } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
+import { API_BASE_URL } from "../config";
+import { watchlist } from "../data/data";
 
 import GeneralContext from "./GeneralContext";
 import "./BuyActionWindow.css";
 
 const BuyActionWindow = ({ uid, mode = "BUY" }) => {
   const { closeBuyWindow } = useContext(GeneralContext);
+
+  const matchedStock = watchlist.find((s) => s.name === uid);
+  const defaultPrice = matchedStock ? matchedStock.price : 100.0;
+
   const [stockQuantity, setStockQuantity] = useState(1);
-  const [stockPrice, setStockPrice] = useState(0.0);
+  const [stockPrice, setStockPrice] = useState(defaultPrice);
+  const [loading, setLoading] = useState(false);
+  const [statusMsg, setStatusMsg] = useState("");
 
-  const handleOrderClick = () => {
-    axios.post("http://localhost:3002/newOrder", {
-      name: uid,
-      qty: Number(stockQuantity),
-      price: Number(stockPrice),
-      mode: mode,
-    });
+  const handleOrderClick = async (e) => {
+    if (e && e.preventDefault) e.preventDefault();
+    if (loading) return;
 
+    setLoading(true);
+    setStatusMsg("");
+
+    try {
+      const finalPrice = Number(stockPrice) > 0 ? Number(stockPrice) : defaultPrice;
+      const finalQty = Number(stockQuantity) > 0 ? Number(stockQuantity) : 1;
+
+      const res = await axios.post(
+        `${API_BASE_URL}/newOrder`,
+        {
+          name: uid,
+          qty: finalQty,
+          price: String(finalPrice),
+          mode: mode,
+        },
+        { withCredentials: true }
+      );
+
+      if (res.data && res.data.success) {
+        setStatusMsg("Order placed successfully!");
+        window.dispatchEvent(new Event("orderPlaced"));
+        setTimeout(() => {
+          closeBuyWindow();
+        }, 500);
+      } else {
+        setStatusMsg(res.data?.message || "Failed to place order");
+      }
+    } catch (err) {
+      console.error("New order error:", err);
+      setStatusMsg("Error placing order. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleCancelClick = (e) => {
+    if (e && e.preventDefault) e.preventDefault();
     closeBuyWindow();
   };
 
-  const handleCancelClick = () => {
-    closeBuyWindow();
-  };
+  const calculatedMargin = (Number(stockQuantity) * (Number(stockPrice) || defaultPrice)).toFixed(2);
 
   return (
     <div className="container" id="buy-window" draggable="true">
@@ -43,6 +81,7 @@ const BuyActionWindow = ({ uid, mode = "BUY" }) => {
               type="number"
               name="qty"
               id="qty"
+              min="1"
               onChange={(e) => setStockQuantity(e.target.value)}
               value={stockQuantity}
             />
@@ -54,6 +93,7 @@ const BuyActionWindow = ({ uid, mode = "BUY" }) => {
               name="price"
               id="price"
               step="0.05"
+              min="0.05"
               onChange={(e) => setStockPrice(e.target.value)}
               value={stockPrice}
             />
@@ -61,18 +101,42 @@ const BuyActionWindow = ({ uid, mode = "BUY" }) => {
         </div>
       </div>
 
+      {statusMsg && (
+        <div style={{
+          textAlign: "center",
+          fontSize: "0.85rem",
+          fontWeight: "600",
+          color: statusMsg.includes("success") ? "#2e7d32" : "#c62828",
+          margin: "8px 0"
+        }}>
+          {statusMsg}
+        </div>
+      )}
+
       <div className="buttons">
-        <span>Margin required ₹{(stockQuantity * (stockPrice || 140.65)).toFixed(2)}</span>
+        <span>Margin required ₹{calculatedMargin}</span>
         <div>
-          <Link
+          <button
+            type="button"
             className={`btn ${mode === "SELL" ? "btn-orange" : "btn-blue"}`}
             onClick={handleOrderClick}
+            disabled={loading}
+            style={{
+              cursor: loading ? "not-allowed" : "pointer",
+              border: "none",
+              opacity: loading ? 0.7 : 1,
+            }}
           >
-            {mode === "SELL" ? "Sell" : "Buy"}
-          </Link>
-          <Link to="" className="btn btn-grey" onClick={handleCancelClick}>
+            {loading ? "Placing..." : mode === "SELL" ? "Sell" : "Buy"}
+          </button>
+          <button
+            type="button"
+            className="btn btn-grey"
+            onClick={handleCancelClick}
+            style={{ cursor: "pointer", border: "none" }}
+          >
             Cancel
-          </Link>
+          </button>
         </div>
       </div>
     </div>

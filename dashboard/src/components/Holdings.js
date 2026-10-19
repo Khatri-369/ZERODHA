@@ -1,19 +1,33 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { VerticalGraph } from "./VerticalGraph";
+import { API_BASE_URL } from "../config";
 
 const Holdings = () => {
   const [holdings, setholdings] = useState([]);
 
-  useEffect(() => {
+  const fetchHoldings = () => {
     axios
-      .get("http://localhost:3002/allholdings")
+      .get(`${API_BASE_URL}/allholdings`, { withCredentials: true })
       .then((res) => {
         setholdings(res.data);
       })
       .catch((err) => {
         console.log("Holdings fetch:", err.message);
       });
+  };
+
+  useEffect(() => {
+    fetchHoldings();
+
+    const handleOrderPlaced = () => {
+      fetchHoldings();
+    };
+
+    window.addEventListener("orderPlaced", handleOrderPlaced);
+    return () => {
+      window.removeEventListener("orderPlaced", handleOrderPlaced);
+    };
   }, []);
 
   return <HoldingsDashboard holdings={holdings} />;

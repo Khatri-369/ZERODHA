@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { API_BASE_URL, DASHBOARD_URL } from "../../config";
 
 function Login() {
     const navigate = useNavigate();
@@ -31,21 +32,21 @@ function Login() {
         setLoading(true);
 
         try {
-            const res = await axios.post("http://localhost:3002/login", formData, {
+            const res = await axios.post(`${API_BASE_URL}/login`, formData, {
                 withCredentials: true,
             });
 
             if (res.data && (res.data.success || res.status === 200)) {
                 setSuccessMsg("Logged in successfully! Redirecting to Dashboard...");
                 setTimeout(() => {
-                    window.location.href = "http://localhost:3001";
-                }, 1000);
+                    window.location.href = DASHBOARD_URL;
+                }, 800);
             } else {
                 setErrorMsg(res.data.message || "Invalid credentials. Please try again.");
             }
         } catch (err) {
             console.error("Login network error:", err);
-            const msg = err.response?.data?.message || "Failed to connect to the server. Make sure backend is running on port 3002.";
+            const msg = err.response?.data?.message || "Failed to connect to the backend server. Please verify your connection or try again.";
             setErrorMsg(msg);
         } finally {
             setLoading(false);

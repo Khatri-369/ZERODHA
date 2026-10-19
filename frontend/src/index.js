@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import axios from 'axios';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 // IMPORTING THE COMPONENTS
 import HomePage from './landing_page/home/HomePage.jsx';
@@ -14,7 +16,8 @@ import NotFound from './landing_page/NotFound.jsx';
 import Navbar from './landing_page/Navbar.jsx';
 import Footer from './landing_page/Footer.jsx';
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+// Automatically send cookies with all requests
+axios.defaults.withCredentials = true;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

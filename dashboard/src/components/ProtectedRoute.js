@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import axios from "axios";
+import { API_BASE_URL } from "../config";
 
 const ProtectedRoute = ({ children }) => {
   const [authState, setAuthState] = useState({
@@ -15,7 +16,7 @@ const ProtectedRoute = ({ children }) => {
 
     const verifySession = async () => {
       try {
-        const res = await axios.get("http://localhost:3002/user/profile", {
+        const res = await axios.get(`${API_BASE_URL}/user/profile`, {
           withCredentials: true,
         });
 

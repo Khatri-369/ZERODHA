@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
+import { API_BASE_URL, DASHBOARD_URL } from "../config";
 
 function Navbar() {
     const [user, setUser] = useState(null);
@@ -12,7 +13,7 @@ function Navbar() {
 
     useEffect(() => {
         axios
-            .get("http://localhost:3002/user/profile", { withCredentials: true })
+            .get(`${API_BASE_URL}/user/profile`, { withCredentials: true })
             .then((res) => {
                 if (res.data && (res.data.success || res.data.user)) {
                     setUser(res.data.user);
@@ -25,7 +26,7 @@ function Navbar() {
 
     const handleLogout = async () => {
         try {
-            await axios.get("http://localhost:3002/logout", { withCredentials: true });
+            await axios.get(`${API_BASE_URL}/logout`, { withCredentials: true });
         } catch (e) {
             console.error("Logout error", e);
         }
@@ -58,7 +59,7 @@ function Navbar() {
                                     <li className="nav-item">
                                         <a
                                             className="btn btn-sm btn-outline-primary mx-2 px-3 fw-medium"
-                                            href="http://localhost:3001"
+                                            href={DASHBOARD_URL}
                                             title="Open Kite Dashboard"
                                         >
                                             <i className="fa-solid fa-chart-line me-1"></i> Dashboard

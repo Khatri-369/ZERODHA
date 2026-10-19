@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { API_BASE_URL } from "../config";
 
 const Menu = () => {
   const [selectedMenu, setSelectedMenu] = useState(0);
@@ -9,7 +10,7 @@ const Menu = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3002/user/profile", { withCredentials: true })
+      .get(`${API_BASE_URL}/user/profile`, { withCredentials: true })
       .then((res) => {
         if (res.data && (res.data.success || res.data.user)) {
           setUser(res.data.user);
@@ -30,7 +31,7 @@ const Menu = () => {
 
   const handleLogout = async () => {
     try {
-      await axios.get("http://localhost:3002/logout", { withCredentials: true });
+      await axios.get(`${API_BASE_URL}/logout`, { withCredentials: true });
     } catch (e) {
       console.error("Logout error", e);
     }
