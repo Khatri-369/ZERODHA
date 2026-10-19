@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
 
 function Navbar() {
     const [user, setUser] = useState(null);
     const location = useLocation();
     const navigate = useNavigate();
+
+    const getNavLinkClass = ({ isActive }) =>
+        `nav-link mx-2 ${isActive ? "text-primary fw-semibold" : "text-muted"}`;
 
     useEffect(() => {
         fetch("http://localhost:3002/user/profile", { credentials: "include" })
@@ -78,36 +81,36 @@ function Navbar() {
                             ) : (
                                 <>
                                     <li className="nav-item">
-                                        <Link className="nav-link active mx-2" to="/signup">
+                                        <NavLink className={getNavLinkClass} to="/signup">
                                             Signup
-                                        </Link>
+                                        </NavLink>
                                     </li>
                                     <li className="nav-item">
-                                        <Link className="nav-link active mx-2 fw-medium text-primary" to="/login">
+                                        <NavLink className={getNavLinkClass} to="/login">
                                             Login
-                                        </Link>
+                                        </NavLink>
                                     </li>
                                 </>
                             )}
                             <li className="nav-item">
-                                <Link className="nav-link active mx-2" to="/about">
+                                <NavLink className={getNavLinkClass} to="/about">
                                     About
-                                </Link>
+                                </NavLink>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link active mx-2" to="/products">
+                                <NavLink className={getNavLinkClass} to="/products">
                                     Products
-                                </Link>
+                                </NavLink>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link active mx-2" to="/pricing">
+                                <NavLink className={getNavLinkClass} to="/pricing">
                                     Pricing
-                                </Link>
+                                </NavLink>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link active mx-2" to="/support">
+                                <NavLink className={getNavLinkClass} to="/support">
                                     Support
-                                </Link>
+                                </NavLink>
                             </li>
                         </ul>
                     </div>
