@@ -12,7 +12,7 @@ export default function Team() {
             <div className="row text-muted" style={{ fontSize: "1.05rem", lineHeight: "1.8" }}>
                 <div className="col-12 col-md-6 text-center">
                     <img
-                        src="media/images/omKhatri.jpg"
+                        src="media/images/khatri_om_kumar_profile.jpg"
                         alt="KHATRI OM KUMAR"
                         style={{ width: "230px", height: "230px", borderRadius: "50%", objectFit: "cover", boxShadow: "0 10px 25px rgba(0,0,0,0.15)" }}
                     />
