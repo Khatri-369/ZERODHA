@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
 
 function Navbar() {
     const [user, setUser] = useState(null);
@@ -10,11 +11,11 @@ function Navbar() {
         `nav-link mx-2 ${isActive ? "text-primary fw-semibold" : "text-muted"}`;
 
     useEffect(() => {
-        fetch("http://localhost:3002/user/profile", { credentials: "include" })
-            .then((res) => res.json())
-            .then((data) => {
-                if (data.success && data.user) {
-                    setUser(data.user);
+        axios
+            .get("http://localhost:3002/user/profile", { withCredentials: true })
+            .then((res) => {
+                if (res.data && res.data.success && res.data.user) {
+                    setUser(res.data.user);
                 } else {
                     setUser(null);
                 }
@@ -24,7 +25,7 @@ function Navbar() {
 
     const handleLogout = async () => {
         try {
-            await fetch("http://localhost:3002/logout", { credentials: "include" });
+            await axios.get("http://localhost:3002/logout", { withCredentials: true });
         } catch (e) {
             console.error("Logout error", e);
         }

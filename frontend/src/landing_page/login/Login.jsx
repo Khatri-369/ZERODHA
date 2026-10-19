@@ -36,12 +36,6 @@ function Login() {
             });
 
             if (res.data && (res.data.success || res.status === 200)) {
-                if (res.data.token) {
-                    localStorage.setItem("token", res.data.token);
-                }
-                if (res.data.user) {
-                    localStorage.setItem("user", JSON.stringify(res.data.user));
-                }
                 setSuccessMsg("Logged in successfully! Redirecting to Dashboard...");
                 setTimeout(() => {
                     window.location.href = "http://localhost:3001";

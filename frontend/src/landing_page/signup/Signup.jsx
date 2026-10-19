@@ -42,12 +42,6 @@ function Signup() {
             });
 
             if (res.data && (res.data.success || res.status === 201 || res.data.token)) {
-                if (res.data.token) {
-                    localStorage.setItem("token", res.data.token);
-                }
-                if (res.data.user) {
-                    localStorage.setItem("user", JSON.stringify(res.data.user));
-                }
                 setSuccessMsg("Account created successfully! Redirecting to Dashboard...");
                 setTimeout(() => {
                     window.location.href = "http://localhost:3001";

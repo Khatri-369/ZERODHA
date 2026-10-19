@@ -18,7 +18,7 @@ const OrderModel = require("./model/OrderSchema");
 const UserModel = require("./model/UserSchema");
 
 const { createSecretToken } = require("./util/secretToken");
-const { isLoggedIn } = require("./middleware/authMiddleware");
+const { verifyUserCookie } = require("./middleware/authMiddleware");
 
 //MIDDLEWARES
 app.use(cors({
@@ -48,8 +48,8 @@ mongoose.connect(url)
 
 //ROUTES
 
-//1. ALL HOLDINGS
-app.get("/allholdings", async (req, res) => {
+//1. ALL HOLDINGS (Protected)
+app.get("/allholdings", verifyUserCookie, async (req, res) => {
     try {
         const holdings = await HoldingModel.find({});
         res.json(holdings);
@@ -59,8 +59,8 @@ app.get("/allholdings", async (req, res) => {
     }
 });
 
-//2. ALL POSITIONS
-app.get("/allpositions", async (req, res) => {
+//2. ALL POSITIONS (Protected)
+app.get("/allpositions", verifyUserCookie, async (req, res) => {
     try {
         const positions = await PositionModel.find({});
         res.json(positions);
@@ -70,8 +70,8 @@ app.get("/allpositions", async (req, res) => {
     }
 });
 
-//4. ALL ORDERS
-app.get("/allorders", async (req, res) => {
+//4. ALL ORDERS (Protected)
+app.get("/allorders", verifyUserCookie, async (req, res) => {
     try {
         const orders = await OrderModel.find({});
         res.json(orders);
@@ -81,8 +81,8 @@ app.get("/allorders", async (req, res) => {
     }
 });
 
-//3. NEW ORDER
-app.post("/newOrder", async (req, res) => {
+//3. NEW ORDER (Protected)
+app.post("/newOrder", verifyUserCookie, async (req, res) => {
     try {
         let newOrder = new OrderModel({
             name: req.body.name,
@@ -179,8 +179,8 @@ app.get("/logout", (req, res) => {
     res.status(200).json({ success: true, message: "Logged out successfully!" });
 });
 
-// 4. Protected Profile Route (Using isLoggedIn middleware)
-app.get("/user/profile", isLoggedIn, (req, res) => {
+// 4. Protected Profile Route (Using verifyUserCookie middleware)
+app.get("/user/profile", verifyUserCookie, (req, res) => {
     res.json({
         success: true,
         user: req.user,

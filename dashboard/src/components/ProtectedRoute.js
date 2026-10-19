@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
+import axios from "axios";
 import { API_BASE_URL } from "../config";
 
 const ProtectedRoute = ({ children }) => {
@@ -14,32 +15,19 @@ const ProtectedRoute = ({ children }) => {
     let isMounted = true;
 
     const verifySession = async () => {
-      const storedToken = localStorage.getItem("token");
-
       try {
-        const headers = storedToken
-          ? { Authorization: `Bearer ${storedToken}` }
-          : {};
-
-        const res = await fetch(`${API_BASE_URL}/user/profile`, {
-          method: "GET",
-          credentials: "include",
-          headers,
+        const res = await axios.get(`${API_BASE_URL}/user/profile`, {
+          withCredentials: true,
         });
 
-        const data = await res.json();
-
         if (isMounted) {
-          if (data && data.success && data.user) {
-            localStorage.setItem("user", JSON.stringify(data.user));
+          if (res.data && res.data.success && res.data.user) {
             setAuthState({
               isLoading: false,
               isAuthenticated: true,
-              user: data.user,
+              user: res.data.user,
             });
           } else {
-            localStorage.removeItem("token");
-            localStorage.removeItem("user");
             setAuthState({
               isLoading: false,
               isAuthenticated: false,
@@ -48,21 +36,7 @@ const ProtectedRoute = ({ children }) => {
           }
         }
       } catch (err) {
-        console.error("Auth check failed:", err);
         if (isMounted) {
-          // If offline/error but token & cached user exist, grant fallback access
-          const cachedUser = localStorage.getItem("user");
-          if (storedToken && cachedUser) {
-            try {
-              setAuthState({
-                isLoading: false,
-                isAuthenticated: true,
-                user: JSON.parse(cachedUser),
-              });
-              return;
-            } catch (e) {}
-          }
-
           setAuthState({
             isLoading: false,
             isAuthenticated: false,

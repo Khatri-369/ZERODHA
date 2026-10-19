@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import { API_BASE_URL } from "../config";
 
 const Menu = () => {
@@ -8,14 +9,11 @@ const Menu = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    const headers = token ? { Authorization: `Bearer ${token}` } : {};
-
-    fetch(`${API_BASE_URL}/user/profile`, { credentials: "include", headers })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success && data.user) {
-          setUser(data.user);
+    axios
+      .get(`${API_BASE_URL}/user/profile`, { withCredentials: true })
+      .then((res) => {
+        if (res.data && res.data.success && res.data.user) {
+          setUser(res.data.user);
         }
       })
       .catch((e) => {
@@ -33,12 +31,10 @@ const Menu = () => {
 
   const handleLogout = async () => {
     try {
-      await fetch(`${API_BASE_URL}/logout`, { credentials: "include" });
+      await axios.get(`${API_BASE_URL}/logout`, { withCredentials: true });
     } catch (e) {
       console.error("Logout error", e);
     }
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
     setUser(null);
     window.location.href = "/login";
   };

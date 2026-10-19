@@ -17,17 +17,11 @@ const Login = () => {
   // Check if already authenticated
   useEffect(() => {
     const checkAuth = async () => {
-      const storedToken = localStorage.getItem("token");
       try {
-        const headers = storedToken
-          ? { Authorization: `Bearer ${storedToken}` }
-          : {};
-        const res = await fetch(`${API_BASE_URL}/user/profile`, {
-          credentials: "include",
-          headers,
+        const res = await axios.get(`${API_BASE_URL}/user/profile`, {
+          withCredentials: true,
         });
-        const data = await res.json();
-        if (data && data.success && data.user) {
+        if (res.data && res.data.success && res.data.user) {
           navigate("/", { replace: true });
         }
       } catch (e) {
@@ -48,7 +42,7 @@ const Login = () => {
     setSuccessMsg("");
 
     if (!formData.email.trim() || !formData.password) {
-      setErrorMsg("Please enter email/username and password.");
+      setErrorMsg("Please enter email and password.");
       return;
     }
 
@@ -60,12 +54,6 @@ const Login = () => {
       });
 
       if (res.data && (res.data.success || res.status === 200)) {
-        if (res.data.token) {
-          localStorage.setItem("token", res.data.token);
-        }
-        if (res.data.user) {
-          localStorage.setItem("user", JSON.stringify(res.data.user));
-        }
         setSuccessMsg("Login successful! Redirecting to Dashboard...");
         setTimeout(() => {
           navigate("/", { replace: true });
