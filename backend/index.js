@@ -90,10 +90,13 @@ app.get("/allpositions", optionalAuth, async (req, res) => {
     }
 });
 
-//4. ALL ORDERS
+//4. ALL ORDERS (Scoped to authenticated user)
 app.get("/allorders", optionalAuth, async (req, res) => {
     try {
-        const orders = await OrderModel.find({}).sort({ _id: -1 });
+        if (!req.user || !req.user._id) {
+            return res.json([]);
+        }
+        const orders = await OrderModel.find({ userId: req.user._id }).sort({ _id: -1 });
         res.json(orders);
     } catch (err) {
         console.error("DB error:", err);
@@ -113,9 +116,11 @@ app.post("/newOrder", optionalAuth, async (req, res) => {
         const orderQty = Math.max(1, Number(qty) || 1);
         const orderPrice = Number(price) || 0;
         const orderMode = mode ? String(mode).toUpperCase() : "BUY";
+        const userId = req.user?._id || null;
 
         // 1. Create and save the order in OrderModel
         let newOrder = new OrderModel({
+            userId: userId || undefined,
             name: stockName,
             qty: orderQty,
             price: String(orderPrice),
